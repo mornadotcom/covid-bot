@@ -14,22 +14,19 @@ def sms_reply():
     msg = request.form.get('Body')
     resp = MessagingResponse()
     if msg.upper() == "HELP":
-        help_msg = "manual:\n Available commands: \n\ti)Covid <RTO_PASSING> e.g. Covid MH12 give count of Pune \n\t"+\
-        "ii)State codes (Some states in app use slightly different state code, check those state codes here before firing command (i))"
+        help_msg = "User Manual:\n Available commands: \n\ti)Covid <RTO_PASSING> e.g. Covid MH12 give count of Pune \n\t"+\
+        "ii)STATE CODES (Some states in app use slightly different state code, check those by sending message STATE CODES, before firing command (i))"
         resp.message(help_msg)
     # Create reply
-    # resp.message("You said: {}".format(msg))
     elif msg.upper() == "STATE CODES":
-        state_codes = "(Those not mentioned below follows normal RTO codes) \n1) UT - Uttarakhand \n" 
+        state_codes = "(Those not mentioned below follows normal RTO codes) \n1) UT - Uttarakhand \n2) TG - Telangana" 
         resp.message(state_codes)
     elif msg.upper()[0:5] == "COVID" and len(msg)==10:
         query_data = covid_data(msg.upper())
-        resp.message("Data for your query {}".format(query_data))
+        resp.message("Data for your query: {}".format(query_data))
     else :
         error_msg = "Wrong command"
         resp.message(error_msg)
-    #, msg, " is ", query_data)
-
     return str(resp)
 
 if __name__ == "__main__":
