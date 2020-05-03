@@ -19,7 +19,8 @@ def sms_reply():
         resp.message(help_msg)
     # Create reply
     elif msg.upper() == "STATE CODES":
-        state_codes = "(Those not mentioned below follows normal RTO codes) \n1) UT - Uttarakhand \n2) TG - Telangana" 
+        state_codes = "(Those not mentioned below follows normal RTO codes) \n1) UT - Uttarakhand \n2) TG - Telangana \n3)OR - Odisha"+\
+        "4)CT - Chhattisgarh 5)AR - Arunachal Pradesh" 
         resp.message(state_codes)
     elif msg.upper()[0:5] == "COVID" and len(msg)==10:
         query_data = covid_data(msg.upper())

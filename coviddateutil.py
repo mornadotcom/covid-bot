@@ -54,4 +54,4 @@ def get_dist(dist_code):
 	filter_keys.append(dist_name)
 	return filter_keys
 
-covid_data("covid TG01")
+covid_data("covid AR28")
