@@ -80,7 +80,6 @@ def covid_data_by_state_and_date(keyToSearch):
                 json_search_keys = create_filter_for_state(keyToSearch)
                 if json_search_keys == "Wrong Command" or json_search_keys == ": Data error":
                         return json_search_keys
-                print("covid_data for states--", json_search_keys)
                 daily_data = covid_data["states_daily"]
                 for k in daily_data:
                         covid_states = json.dumps(k)
@@ -88,7 +87,7 @@ def covid_data_by_state_and_date(keyToSearch):
                         #print(covid_states_json["status"], " <-> ", json_search_keys[4])
                         if covid_states_json["date"] == json_search_keys[2] and covid_states_json["status"] == json_search_keys[4]:
                                 #print("Data : ", covid_states_json[json_search_keys[1]])
-                                return json_search_keys[1]+" "+json_search_keys[4]+"on date "+json_search_keys[2]+" -> "covid_states_json[json_search_keys[1]]
+                                return json_search_keys[1]+" "+json_search_keys[4]+"on date "+json_search_keys[2]+" -> "+covid_states_json[json_search_keys[1]]
         except KeyError:
                 print("Data error")
                 return ": Data error or probably no data for your query"
