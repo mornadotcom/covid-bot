@@ -27,7 +27,7 @@ def sms_reply():
     elif msg.upper()[0:5] == "COVID" and len(msg)==10:
         query_data = covid_data(msg.upper())
         resp.message("Data for your query: {}".format(query_data))
-    elif msg.upper()[0:5] == "COVID" and len(msg)==22:
+    elif msg.upper()[0:5] == "COVID" and len(msg)==20:
         query_data = covid_data_by_state_and_date(msg)
         resp.message("Data for your query: {}".format(query_data))
     else :
