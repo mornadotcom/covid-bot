@@ -87,7 +87,7 @@ def covid_data_by_state_and_date(keyToSearch):
                         #print(covid_states_json["status"], " <-> ", json_search_keys[4])
                         if covid_states_json["date"] == json_search_keys[2] and covid_states_json["status"] == json_search_keys[4]:
                                 #print("Data : ", covid_states_json[json_search_keys[1]])
-                                return json_search_keys[1]+" "+json_search_keys[4]+"on date "+json_search_keys[2]+" -> "+covid_states_json[json_search_keys[1]]
+                                return json_search_keys[1]+" "+json_search_keys[4]+" on date "+json_search_keys[2]+" -> "+covid_states_json[json_search_keys[1]]
         except KeyError:
                 print("Data error")
                 return ": Data error or probably no data for your query"
