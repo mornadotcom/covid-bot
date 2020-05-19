@@ -54,4 +54,41 @@ def get_dist(dist_code):
 	filter_keys.append(dist_name)
 	return filter_keys
 
-covid_data("covid AR28")
+def create_filter_for_state(state_query):
+	broken = state_query.split(" ")
+	try:
+	if len(broken) == 4:
+		if broken[3].upper() == "C":
+			broken.append('Confirmed')
+		elif broken[3].upper() == "D":
+			broken.append("Deceased")
+		elif broken[3].upper() == "R":
+			broken.append("Recovered")
+		elif broken[3].upper() == "A":
+			broken.append("Active")
+	else:
+		return "Wrong Command"
+	return broken
+
+def covid_data_by_state_and_date(keyToSearch):
+        response = requests.get('https://api.covid19india.org/states_daily.json')
+        print("RESPONSE", response)
+        try:
+                covid_data = response.json()
+                json_search_keys = create_filter_for_state(keyToSearch)
+                if json_search_keys == "Wrong Command":
+                        return json_search_keys
+                print("covid_data for states--", json_search_keys)
+                daily_data = covid_data["states_daily"]
+                for k in daily_data:
+                        covid_states = json.dumps(k)
+                        covid_states_json = json.loads(covid_states)
+                        if covid_states_json["date"] == json_search_keys[2] and covid_states_json["status"] == json_search_keys[4]:
+                                return covid_states_json[json_search_keys[1]]
+        except KeyError:
+                print("Data error")
+                return ": Data error or probably no data for your query"
+
+
+#covid_data("covid AR28")
+#covid_data_by_state_and_date("Covid mh 18-May-20 c")
