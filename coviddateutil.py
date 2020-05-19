@@ -61,11 +61,11 @@ def create_filter_for_state(state_query):
 			if broken[3].upper() == "C":
 				broken.append('Confirmed')
 			elif broken[3].upper() == "D":
-				broken.append("Deceased")
+				broken.append('Deceased')
 			elif broken[3].upper() == "R":
-				broken.append("Recovered")
+				broken.append('Recovered')
 			elif broken[3].upper() == "A":
-				broken.append("Active")
+				broken.append('Active')
 		else:
 			return "Wrong Command"
 	except KeyError:
@@ -85,12 +85,14 @@ def covid_data_by_state_and_date(keyToSearch):
                 for k in daily_data:
                         covid_states = json.dumps(k)
                         covid_states_json = json.loads(covid_states)
+                        #print(covid_states_json["status"], " <-> ", json_search_keys[4])
                         if covid_states_json["date"] == json_search_keys[2] and covid_states_json["status"] == json_search_keys[4]:
-                                return covid_states_json[json_search_keys[1]]
+                                #print("Data : ", covid_states_json[json_search_keys[1]])
+                                return json_search_keys[1]+" "+json_search_keys[4]+"on date "+json_search_keys[2]+" -> "covid_states_json[json_search_keys[1]]
         except KeyError:
                 print("Data error")
                 return ": Data error or probably no data for your query"
 
 
 #covid_data("covid AR28")
-#covid_data_by_state_and_date("Covid mh 18-May-20 c")
+covid_data_by_state_and_date("Covid mh 18-May-20 r")
