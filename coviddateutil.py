@@ -55,19 +55,21 @@ def get_dist(dist_code):
 	return filter_keys
 
 def create_filter_for_state(state_query):
-	broken = state_query.split(" ")
 	try:
-	if len(broken) == 4:
-		if broken[3].upper() == "C":
-			broken.append('Confirmed')
-		elif broken[3].upper() == "D":
-			broken.append("Deceased")
-		elif broken[3].upper() == "R":
-			broken.append("Recovered")
-		elif broken[3].upper() == "A":
-			broken.append("Active")
-	else:
-		return "Wrong Command"
+		broken = state_query.split(" ")
+		if len(broken) == 4:
+			if broken[3].upper() == "C":
+				broken.append('Confirmed')
+			elif broken[3].upper() == "D":
+				broken.append("Deceased")
+			elif broken[3].upper() == "R":
+				broken.append("Recovered")
+			elif broken[3].upper() == "A":
+				broken.append("Active")
+		else:
+			return "Wrong Command"
+	except KeyError:
+		return ": Data error"
 	return broken
 
 def covid_data_by_state_and_date(keyToSearch):
@@ -76,7 +78,7 @@ def covid_data_by_state_and_date(keyToSearch):
         try:
                 covid_data = response.json()
                 json_search_keys = create_filter_for_state(keyToSearch)
-                if json_search_keys == "Wrong Command":
+                if json_search_keys == "Wrong Command" or json_search_keys == ": Data error":
                         return json_search_keys
                 print("covid_data for states--", json_search_keys)
                 daily_data = covid_data["states_daily"]
